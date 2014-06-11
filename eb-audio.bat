@@ -5,11 +5,16 @@ set t=%2
 shift & shift
 
 set source=0
+set offset=0
 
 :loop
 if not "%1"=="" (
     if "%1"=="--source" (
         set source=%2
+        shift
+    )
+    if "%1"=="--offset" (
+        set offset=%2
         shift
     )
     if "%1"=="-d" (
@@ -19,6 +24,8 @@ if not "%1"=="" (
     shift
     goto :loop
 )
+
+set /a "index = offset + 1"
 
 if not defined d (
     echo "-d directory is required" >&2
@@ -32,7 +39,7 @@ java -jar ad-edit-0.0.0.jar %c% %t% --format wav --exec ^
     gnupack_basic-11.00\app\cygwin\cygwin\bin\sed -e "$s@$@\n\n\n\n\n\n\n\n\n@" ^| ^
     gnupack_basic-11.00\app\cygwin\cygwin\bin\sed -e "s@^@<?xml version=\"\"1.0\"\" ?><entry>@g" ^| ^
     gnupack_basic-11.00\app\cygwin\cygwin\bin\sed -e "s@$@</entry>@g" ^| ^
-    gnupack_basic-11.00\app\cygwin\cygwin\bin\sed -n "1p" ^| ^
-    gnupack_basic-11.00\app\cygwin\cygwin\bin\xmllint --nowarning --xpath "substring-after(//audio[position()=1]/@src, \"\"base64,\"\")" - ^| ^
+    gnupack_basic-11.00\app\cygwin\cygwin\bin\sed -n "%index%p" ^| ^
+    gnupack_basic-11.00\app\cygwin\cygwin\bin\xmllint --xpath "substring-after(//audio[position()=1]/@src, \"\"base64,\"\")" - ^| ^
     gnupack_basic-11.00\app\cygwin\cygwin\bin\base64 -d
     
