@@ -32,7 +32,7 @@ if not defined d (
     exit /b 1
 )
 
-java -jar dep\ad-edit-0.0.0.jar %c% %t% --format wav --exec ^
+java -jar dep\ad-edit-0.0.1.jar %c% %t% --format wav --exec ^
     java -Dfile.encoding=utf-8 -jar dep\ebquery-0.3.1.jar -f html -d %d% -m sd "${ field(%source%) }" ^| ^
     gawk "{ print $0 } END { print \"\n\n\n\n\n\n\n\n\n\n\" }" ^| ^
     sed -e "s@\\(</audio>\\)@\\1\\n@g" ^| ^

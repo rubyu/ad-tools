@@ -33,7 +33,7 @@ if not defined d (
     exit /b 1
 )
 
-set command=java -jar dep\ad-edit-0.0.0.jar %c% %t% --format html
+set command=java -jar dep\ad-edit-0.0.1.jar %c% %t% --format html
 
 set command=%command% --exec java -Dfile.encoding=utf-8 -jar dep\ebquery-0.3.1.jar -f html -d %d%
 
