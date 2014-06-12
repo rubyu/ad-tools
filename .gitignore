@@ -1,5 +1,5 @@
 /collection.media/*
-/gnupack*
+/dep/*
 *.jar
 *.txt
 *.tsv
